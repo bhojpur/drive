@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/moby/sys/mountinfo"
+	"github.com/bhojpur/drive/pkg/mountinfo"
 )
 
 func TestMountOptionsParsing(t *testing.T) {
