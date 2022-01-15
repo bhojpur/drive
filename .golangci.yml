@@ -1,4 +1,7 @@
 linters:
+  disable:
+    - unused
+    - deadcode
   enable:
     - unconvert
     - errorlint

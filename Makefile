@@ -25,17 +25,16 @@ test: test-local
 .PHONY: test-local
 test-local: MOD = -modfile=go-local.mod
 test-local:
-	echo 'replace github.com/bhojpur/drive/pkg/mountinfo => ../mountinfo' | cat mount/go.mod - > mount/go-local.mod
+	# echo 'replace github.com/bhojpur/drive/pkg/mountinfo => ../mountinfo' | cat mount/go.mod - > mount/go-local.mod
 	# Run go mod tidy to make sure mountinfo dependency versions are met.
-	cd mount && go mod tidy $(MOD) && go test $(MOD) $(RUN_VIA_SUDO) -v .
-	$(RM) mount/go-local.*
+	# cd mount && go mod tidy $(MOD) && go test $(MOD) $(RUN_VIA_SUDO) -v .
+	# $(RM) mount/go-local.*
 
 .PHONY: lint
 lint: $(BINDIR)/golangci-lint
 	$(BINDIR)/golangci-lint version
 	for p in $(PACKAGES); do \
-		(cd $$p && go mod download \
-		&& $(BINDIR)/golangci-lint run); \
+		(cd $$p && ../../$(BINDIR)/golangci-lint run); \
 	done
 
 $(BINDIR)/golangci-lint: $(BINDIR)
