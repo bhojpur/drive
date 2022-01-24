@@ -1,4 +1,4 @@
-package cmd
+package storage
 
 // Copyright (c) 2018 Bhojpur Consulting Private Limited, India. All rights reserved.
 
@@ -21,40 +21,20 @@ package cmd
 // THE SOFTWARE.
 
 import (
-	"fmt"
-	"os"
-
-	log "github.com/sirupsen/logrus"
-	"github.com/spf13/cobra"
+	"github.com/bhojpur/drive/pkg/model"
 )
 
-var verbose bool
-
-// rootCmd represents the base command when called without any subcommands
-var rootCmd = &cobra.Command{
-	Use:   "drivesvr",
-	Short: "Bhojpur Drive Server is a high performance, distributed file storage service provider",
-	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		if verbose {
-			log.SetLevel(log.DebugLevel)
-			log.Debug("verbose logging enabled")
-		}
-	},
-
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	//	Run: func(cmd *cobra.Command, args []string) { },
-}
-
-// Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
-func Execute() {
-	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+func GetStorageProvider(providerType string, clientId string, clientSecret string, region string, bucket string, endpoint string) model.StorageInterface {
+	switch providerType {
+	case "Local File System":
+		return NewLocalFileSystemStorageProvider(clientId, clientSecret, region, bucket, endpoint)
+	case "AWS S3":
+		return NewAwsS3StorageProvider(clientId, clientSecret, region, bucket, endpoint)
+	case "Aliyun OSS":
+		return NewAliyunOssStorageProvider(clientId, clientSecret, region, bucket, endpoint)
+	case "Tencent Cloud COS":
+		return NewTencentCloudCosStorageProvider(clientId, clientSecret, region, bucket, endpoint)
 	}
-}
 
-func init() {
-	rootCmd.PersistentFlags().BoolVar(&verbose, "verbose", false, "en/disable verbose logging")
+	return nil
 }

@@ -1,4 +1,4 @@
-package cmd
+package model
 
 // Copyright (c) 2018 Bhojpur Consulting Private Limited, India. All rights reserved.
 
@@ -21,40 +21,31 @@ package cmd
 // THE SOFTWARE.
 
 import (
-	"fmt"
+	"io"
 	"os"
-
-	log "github.com/sirupsen/logrus"
-	"github.com/spf13/cobra"
+	"time"
 )
 
-var verbose bool
-
-// rootCmd represents the base command when called without any subcommands
-var rootCmd = &cobra.Command{
-	Use:   "drivesvr",
-	Short: "Bhojpur Drive Server is a high performance, distributed file storage service provider",
-	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		if verbose {
-			log.SetLevel(log.DebugLevel)
-			log.Debug("verbose logging enabled")
-		}
-	},
-
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	//	Run: func(cmd *cobra.Command, args []string) { },
+// StorageInterface define common API to operate storage
+type StorageInterface interface {
+	Get(path string) (*os.File, error)
+	GetStream(path string) (io.ReadCloser, error)
+	Put(path string, reader io.Reader) (*Object, error)
+	Delete(path string) error
+	List(path string) ([]*Object, error)
+	GetURL(path string) (string, error)
+	GetEndpoint() string
 }
 
-// Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
-func Execute() {
-	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+// Object content object
+type Object struct {
+	Path             string
+	Name             string
+	LastModified     *time.Time
+	StorageInterface StorageInterface
 }
 
-func init() {
-	rootCmd.PersistentFlags().BoolVar(&verbose, "verbose", false, "en/disable verbose logging")
+// Get retrieve object's content
+func (object Object) Get() (*os.File, error) {
+	return object.StorageInterface.Get(object.Path)
 }

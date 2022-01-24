@@ -1,4 +1,4 @@
-package cmd
+package tencent_test
 
 // Copyright (c) 2018 Bhojpur Consulting Private Limited, India. All rights reserved.
 
@@ -21,40 +21,47 @@ package cmd
 // THE SOFTWARE.
 
 import (
+	"bytes"
 	"fmt"
-	"os"
+	"io/ioutil"
+	"testing"
 
-	log "github.com/sirupsen/logrus"
-	"github.com/spf13/cobra"
+	tencent "github.com/bhojpur/drive/pkg/provider/tencent"
+	"github.com/bhojpur/drive/tests"
 )
 
-var verbose bool
+func TestClient_Get(t *testing.T) {
 
-// rootCmd represents the base command when called without any subcommands
-var rootCmd = &cobra.Command{
-	Use:   "drivesvr",
-	Short: "Bhojpur Drive Server is a high performance, distributed file storage service provider",
-	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		if verbose {
-			log.SetLevel(log.DebugLevel)
-			log.Debug("verbose logging enabled")
-		}
-	},
-
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	//	Run: func(cmd *cobra.Command, args []string) { },
 }
 
-// Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
-func Execute() {
-	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-}
+var client *tencent.Client
 
 func init() {
-	rootCmd.PersistentFlags().BoolVar(&verbose, "verbose", false, "en/disable verbose logging")
+	client = tencent.New(&tencent.Config{
+		AppID:     "1252882253",
+		AccessID:  "AKIDToxukQWBG8nGXcBN8i662nOo12sc5Wjl",
+		AccessKey: "40jNrBf5mLiuuiU8HH7lDTXP5at00sbA",
+		Bucket:    "tets-1252882253",
+		Region:    "ap-shanghai",
+		ACL:       "public-read", // private，public-read-write，public-read；默认值：private
+		//Endpoint:  config.Public.Endpoint,
+	})
+}
+
+func TestClient_Put(t *testing.T) {
+	f, err := ioutil.ReadFile("/home/shashi.rai/Downloads/2.png")
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	client.Put("test.png", bytes.NewReader(f))
+}
+
+func TestClient_Put2(t *testing.T) {
+	tests.TestAll(client, t)
+}
+
+func TestClient_Delete(t *testing.T) {
+	fmt.Println(client.Delete("test.png"))
 }

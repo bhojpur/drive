@@ -1,0 +1,61 @@
+before:
+  hooks:
+    - go generate -v ./...
+builds:
+- id: drivesvr
+  env:
+  - CGO_ENABLED=0
+  main: server.go
+  binary: drivesvr
+  ldflags:
+  - -s -w -X github.com/bhojpur/drive/cmd/server.version={{.Version}}-{{.ShortCommit}}
+- id: drivectl
+  env:
+  - CGO_ENABLED=0
+  main: client.go
+  binary: drivectl
+  flags:
+    - -tags=drivectl
+  ldflags:
+  - -s -w -X github.com/bhojpur/drive/cmd/client.version={{.Version}}-{{.ShortCommit}}
+archives:
+- id: drivesvr
+  replacements:
+    darwin: Darwin
+    linux: Linux
+    386: i386
+    amd64: x86_64
+  builds:
+  - drivesvr
+- id: drivectl
+  files:
+  - "none*"
+  format: binary
+  builds:
+  - drivectl
+  replacements:
+    darwin: Darwin
+    linux: Linux
+    386: i386
+    amd64: x86_64
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
+release:
+  prerelease: auto
+dockers:
+  - goos: linux
+    goarch: amd64
+    goarm: ''
+    dockerfile: Dockerfile
+    image_templates:
+    - "ghcr.io/bhojpur/drive:{{ .Tag }}"
+    extra_files:
+    - README.md

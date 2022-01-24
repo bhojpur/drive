@@ -61,8 +61,8 @@ var rootCmdOpts struct {
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "drive",
-	Short: "Bhojpur Drive is a file storage system powered by Kubernetes",
+	Use:   "drivectl",
+	Short: "Bhojpur Drive Client is an enterprise grade, distributed file storage command engine",
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		if verbose {
 			log.SetLevel(log.DebugLevel)
