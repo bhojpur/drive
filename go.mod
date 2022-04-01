@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/aliyun/aliyun-oss-go-sdk v2.2.0+incompatible
-	github.com/aws/aws-sdk-go v1.42.39
+	github.com/aws/aws-sdk-go v1.43.30
 	github.com/bhojpur/configure v0.0.1
 	github.com/lib/pq v1.10.4
 	github.com/qiniu/go-sdk/v7 v7.11.1
@@ -36,7 +36,7 @@ require (
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	golang.org/x/crypto v0.0.0-20220112180741-5e0467b6c7ce // indirect
-	golang.org/x/net v0.0.0-20220121210141-e204ce36a2ba // indirect
+	golang.org/x/net v0.0.0-20220127200216-cd36cc0744dd // indirect
 	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8 // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
 	golang.org/x/term v0.0.0-20210927222741-03fcf44c2211 // indirect
