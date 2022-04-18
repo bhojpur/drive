@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go v1.42.39
 	github.com/bhojpur/configure v0.0.1
 	github.com/lib/pq v1.10.4
-	github.com/qiniu/go-sdk/v7 v7.11.1
+	github.com/qiniu/go-sdk/v7 v7.12.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.3.0
 	golang.org/x/sys v0.0.0-20220114195835-da31bd327af9
