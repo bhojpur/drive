@@ -3,7 +3,7 @@ module github.com/bhojpur/drive
 go 1.17
 
 require (
-	github.com/aliyun/aliyun-oss-go-sdk v2.2.0+incompatible
+	github.com/aliyun/aliyun-oss-go-sdk v2.2.3+incompatible
 	github.com/aws/aws-sdk-go v1.42.39
 	github.com/bhojpur/configure v0.0.1
 	github.com/lib/pq v1.10.4
