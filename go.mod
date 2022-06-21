@@ -9,7 +9,7 @@ require (
 	github.com/lib/pq v1.10.4
 	github.com/qiniu/go-sdk/v7 v7.11.1
 	github.com/sirupsen/logrus v1.8.1
-	github.com/spf13/cobra v1.3.0
+	github.com/spf13/cobra v1.5.0
 	golang.org/x/sys v0.0.0-20220114195835-da31bd327af9
 	google.golang.org/grpc v1.43.0
 	google.golang.org/protobuf v1.27.1
