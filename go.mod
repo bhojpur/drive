@@ -12,7 +12,7 @@ require (
 	github.com/spf13/cobra v1.3.0
 	golang.org/x/sys v0.0.0-20220114195835-da31bd327af9
 	google.golang.org/grpc v1.43.0
-	google.golang.org/protobuf v1.27.1
+	google.golang.org/protobuf v1.30.0
 	k8s.io/apimachinery v0.23.2
 	k8s.io/client-go v1.5.2
 )
