@@ -3,7 +3,7 @@ module github.com/bhojpur/drive
 go 1.17
 
 require (
-	github.com/aliyun/aliyun-oss-go-sdk v2.2.0+incompatible
+	github.com/aliyun/aliyun-oss-go-sdk v3.0.1+incompatible
 	github.com/aws/aws-sdk-go v1.42.39
 	github.com/bhojpur/configure v0.0.1
 	github.com/lib/pq v1.10.4
@@ -19,7 +19,6 @@ require (
 
 require (
 	cloud.google.com/go/compute v1.1.0 // indirect
-	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/docker/spdystream v0.1.0 // indirect
 	github.com/go-logr/logr v1.2.2 // indirect
@@ -33,7 +32,6 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
-	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	golang.org/x/crypto v0.0.0-20220112180741-5e0467b6c7ce // indirect
 	golang.org/x/net v0.0.0-20220121210141-e204ce36a2ba // indirect
